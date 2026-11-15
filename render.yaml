@@ -1,0 +1,16 @@
+# Render Blueprint: one web service serves both the API and the React app.
+services:
+  - type: web
+    name: vein
+    runtime: node
+    buildCommand: npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    disk: { name: uploads, mountPath: /var/data/uploads, sizeGB: 1 }
+    envVars:
+      - { key: NODE_ENV, value: production }
+      - { key: UPLOAD_DIR, value: /var/data/uploads }
+      - { key: JWT_SECRET, generateValue: true }
+      - { key: MONGO_URI, sync: false }
+      - { key: ADMIN_EMAIL, sync: false }
+      - { key: ADMIN_PASSWORD, sync: false }

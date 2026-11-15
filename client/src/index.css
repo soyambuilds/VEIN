@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body { @apply bg-mist font-sans text-ink antialiased; }
+  h1, h2, h3 { @apply font-display font-extrabold tracking-tight; }
+  :focus-visible { @apply outline-2 outline-offset-2 outline-blood; }
+}
+
+@layer components {
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-50; }
+  .btn-primary { @apply btn bg-blood text-white hover:bg-wine; }
+  .btn-ghost { @apply btn border border-line bg-white text-ink hover:bg-mist; }
+  .btn-sm { @apply px-3 py-1.5 text-xs; }
+  .input { @apply w-full rounded-lg border border-line bg-white px-3 py-2.5 text-sm placeholder:text-slate-400 focus:border-blood focus:outline-none focus:ring-2 focus:ring-blood/20; }
+  .label { @apply mb-1 block text-sm font-semibold; }
+  .panel { @apply rounded-xl border border-line bg-white p-5; }
+}
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+@keyframes fill { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+.fill-in { transform-origin: bottom; animation: fill .9s cubic-bezier(.2,.8,.2,1) both; }

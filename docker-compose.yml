@@ -1,0 +1,20 @@
+# Run everything locally or on a VPS:  docker compose up --build
+services:
+  mongo:
+    image: mongo:7
+    restart: unless-stopped
+    volumes: [mongo-data:/data/db]
+  app:
+    build: .
+    restart: unless-stopped
+    depends_on: [mongo]
+    ports: ["5000:5000"]
+    environment:
+      MONGO_URI: mongodb://mongo:27017/vein
+      JWT_SECRET: ${JWT_SECRET:?set JWT_SECRET in a .env file}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@vein.local}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:?set ADMIN_PASSWORD in a .env file}
+    volumes: [uploads:/data/uploads]
+volumes:
+  mongo-data:
+  uploads:
