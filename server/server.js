@@ -18,7 +18,10 @@ if (!process.env.JWT_SECRET || process.env.JWT_SECRET === 'change-me') {
 const app = express();
 app.set('trust proxy', 1);
 app.use(helmet());
-app.use(cors({ origin: process.env.CLIENT_URL ? process.env.CLIENT_URL.split(',') : true }));
+app.use(cors({
+    origin: ["https://vein-s2fb.vercel.app", "http://localhost:5173"],
+    credentials: true
+}));
 app.use(express.json({ limit: '100kb' }));
 if (process.env.NODE_ENV !== 'test') app.use(morgan('dev'));
 
