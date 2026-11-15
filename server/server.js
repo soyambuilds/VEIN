@@ -46,3 +46,5 @@ connectDB()
   .then(bootstrap)
   .then(() => app.listen(PORT, () => console.log(`VEIN API running on port ${PORT}`)))
   .catch((e) => { console.error('Startup failed:', e.message); process.exit(1); });
+
+  module.exports = app;
